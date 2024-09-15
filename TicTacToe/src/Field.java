@@ -1,11 +1,10 @@
 public class Field {
 
-  public static char [][] map;
+ char[][]map;
 
     public char EMPTY_FIELD = '*';
 
     public final int MAP_SIZE = 3;
-
 
 
     public void printMap(){
@@ -36,4 +35,3 @@ public class Field {
 
     }
 }
-
