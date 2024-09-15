@@ -5,10 +5,7 @@ public class GameLogic {
 
     public final char O_FIELD = 'O';
     Scanner scanner = new Scanner(System.in);
-    Field MAP_SIZE = new Field();
-    Field EMPTY_FIELD = new Field();
-    Field Init = new Field();
-    Field printMap = new Field();
+    Field Field = new Field();
 
     private boolean checkWin(char playerField) {
 
@@ -41,9 +38,9 @@ public class GameLogic {
     }
 
     private boolean checkDraft() {
-        for (int i = 0; i < MAP_SIZE.MAP_SIZE; i++) {
-            for (int j = 0; j < MAP_SIZE.MAP_SIZE; j++) {
-                if (Field.map[i][j] == EMPTY_FIELD.EMPTY_FIELD) {
+        for (int i = 0; i < Field.MAP_SIZE; i++) {
+            for (int j = 0; j < Field.MAP_SIZE; j++) {
+                if (Field.map[i][j] == Field.EMPTY_FIELD) {
                     return false;
                 }
             }
@@ -52,10 +49,10 @@ public class GameLogic {
     }
 
     private boolean isCellValid(int x, int y) {
-        if (x < 0 || y < 0 || x >= MAP_SIZE.MAP_SIZE || y >= MAP_SIZE.MAP_SIZE) {
+        if (x < 0 || y < 0 || x >= Field.MAP_SIZE || y >= Field.MAP_SIZE) {
             return true;
         }
-        if (Field.map[y][x] != EMPTY_FIELD.EMPTY_FIELD) {
+        if (Field.map[y][x] != Field.EMPTY_FIELD) {
             return true;
         }
         return false;
@@ -75,19 +72,18 @@ public class GameLogic {
         int x, y;
         System.out.println("Ход компьютера");
         do {
-            x = (int) (Math.random() * MAP_SIZE.MAP_SIZE); // генерирует ход компьютера
-            y = (int) (Math.random() * MAP_SIZE.MAP_SIZE);
+            x = (int) (Math.random() * Field.MAP_SIZE); // генерирует ход компьютера
+            y = (int) (Math.random() * Field.MAP_SIZE);
         } while (isCellValid(x, y));
         Field.map[y][x] = O_FIELD;
     }
 
     public void Start() {
-        Init.Init();
-        printMap.printMap();
-
+        Field.Init();
+        Field.printMap();
         while (true) {
                 humanTurn();
-                printMap.printMap();
+                Field.printMap();
                 if (checkWin(X_FIELD)) {
                     System.out.println("Игра завершена. Победил игрок");
                     break;
@@ -97,7 +93,7 @@ public class GameLogic {
                     break;
                 }
                 aiTurn();
-                printMap.printMap();
+                Field.printMap();
                 if (checkWin(O_FIELD)) {
                     System.out.println("Игра завершена. Победил компьютер");
                     break;
@@ -109,5 +105,3 @@ public class GameLogic {
             }
         }
     }
-
-
